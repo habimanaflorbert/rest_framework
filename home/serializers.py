@@ -1,5 +1,7 @@
 from rest_framework import serializers
 from home.models import (School,Student)
+from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
+
 
 class StudentSerializer(serializers.ModelSerializer):
     email=serializers.EmailField()
@@ -23,3 +25,16 @@ class SChoolSerializer(serializers.ModelSerializer):
     class Meta:
         model=Student
         fields=['id','first_name','last_name','email','date_ofBirth','subject','gender','image']
+
+
+
+class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
+    @classmethod
+    def get_token(cls, user):
+        token = super().get_token(user)
+
+        # Add custom claims
+        token['email'] = user.email
+        token['first_name'] = user.first_name
+        token['lastst_name'] = user.last_name
+        return token
