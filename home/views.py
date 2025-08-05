@@ -60,9 +60,6 @@ class MyAuthenticationView(APIView):
 class CustomAuthToken(ObtainAuthToken):
     def post(self, request, *args, **kwargs):
         response = super().post(request, *args, **kwargs)
-        print()
-        print(response)
-        print()
         try:
             token = Token.objects.get(key=response.data['token'])
         except Token.DoesNotExist:
