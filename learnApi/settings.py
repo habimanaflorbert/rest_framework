@@ -185,3 +185,4 @@ CACHES = {
         }
     }
 }
+SESSION_COOKIE_SECURE = True
